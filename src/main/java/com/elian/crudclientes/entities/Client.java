@@ -1,4 +1,4 @@
-package com.elian.crudclientes;
+package com.elian.crudclientes.entities;
 
 import jakarta.persistence.*;
 

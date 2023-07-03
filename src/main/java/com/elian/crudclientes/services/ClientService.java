@@ -12,6 +12,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.NoSuchElementException;
+
 @Service
 public class ClientService {
 
@@ -56,8 +58,9 @@ public class ClientService {
     @Transactional
     public void delete(Long id) {
         try {
-            repository.deleteById(id);
-        } catch (EmptyResultDataAccessException e) {
+            Client client = repository.findById(id).get();
+            repository.delete(client);
+        } catch (NoSuchElementException e) {
             throw new ResourceNotFoundException("Recurso não encontrado");
         }
 
